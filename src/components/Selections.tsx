@@ -14,7 +14,7 @@ interface SelectionsProps {
 const Choice: React.FC<ChoiceProps> = ({ src, alt, outerBgColor }) => {
   return (
     <div className={`flex justify-center items-center w-40 md:w-56 h-40 md:h-56 rounded-full ${outerBgColor} hover:bg-opacity-75 transition duration-300 hover:cursor-pointer`}>
-      <div className="flex justify-center items-center w-28 md:w-44 h-28 md:h-44 border rounded-full bg-white shadow-2xl shadow-inner">
+      <div className="flex justify-center items-center w-28 md:w-44 h-28 md:h-44 border rounded-full bg-white">
         <img src={src} alt={alt} className="w-12 md:w-20 h-auto bg-white" />
       </div>
     </div>
