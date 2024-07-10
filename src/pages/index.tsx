@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   const [selection, setSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
   const [win, setWin] = useState(0);
-  const [loss, setLoss] = useState(2);
+  const [loss, setLoss] = useState(0);
 
   const handleSelection = (choice: 'Rock' | 'Paper' | 'Scissors') => {
     setSelection(choice);

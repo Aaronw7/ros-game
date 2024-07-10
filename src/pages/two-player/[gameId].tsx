@@ -122,7 +122,7 @@ export default function Home() {
       <div className="flex flex-col justify-start items-center w-full">
         {isGameFull ? (
           <div>
-            <p className="font-barlow font-bold text-green-500">GAME IS FULL!</p>
+            <p className="font-bold text-green-500">GAME IS FULL!</p>
           </div>
         ):(
           <div className="flex flex-col md:flex-row justify-center items-start md:items-center mb-1">

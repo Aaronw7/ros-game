@@ -83,16 +83,16 @@ const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, u
     <div className="flex flex-col w-full items-center gap-2">
       <div className="flex flex-col md:flex-row w-full justify-center items-center gap-8 md:gap-32 md:my-12">
         <div className="flex flex-col items-center gap-2">
-          <h2 className="font-barlow font-semibold text-2xl">YOU PICKED</h2>
+          <h2 className="font-semibold text-2xl">YOU PICKED</h2>
           <Select src={playerImage.src} alt={playerSelection} outerBgColor={playerImage.bgColor} />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <h2 className="font-barlow font-semibold text-2xl">OPPONENT PICKED</h2>
+          <h2 className="font-semibold text-2xl">OPPONENT PICKED</h2>
           <Select src={opponentImage.src} alt={opponentSelection as 'Rock' | 'Paper' | 'Scissors'} outerBgColor={opponentImage.bgColor} opponent={opponentAnimated} />
         </div>
       </div>
       {resultAnimated && (
-        <h2 className={`font-barlow font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : 'text-green-500'}`}>
+        <h2 className={`font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : 'text-green-500'}`}>
         {result}
       </h2>
       )}
