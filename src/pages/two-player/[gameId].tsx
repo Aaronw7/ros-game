@@ -110,9 +110,9 @@ export default function Home() {
   };
 
   const updateScores = (result: string) => {
-    if (result === 'You win') {
+    if (result === 'YOU WIN') {
       setWin((prevWin) => prevWin + 1);
-    } else if (result === 'You lose') {
+    } else if (result === 'YOU LOSE') {
       setLoss((prevLoss) => prevLoss + 1);
     }
   };

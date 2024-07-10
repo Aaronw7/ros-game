@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}
+      className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial overflow-hidden`}
     >
       <div className="flex flex-col justify-start items-center w-full">
         <Header win={win} loss={loss} />

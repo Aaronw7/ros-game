@@ -1,3 +1,4 @@
+// tailwind.config.js
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -20,8 +21,34 @@ const config: Config = {
         darkText: '#3a475e',
         headerOutline: '#687387'
       },
+      keyframes: {
+        'scale-up': {
+          '0%': { transform: 'scale(0)' },
+          '90%': { transform: 'scale(1.1)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'pulse-scale': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.1)' },
+        },
+        'initial-scale': {
+          '0%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'slide-in': {
+          '0%': { transform: 'translateX(50%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        'scale-up': 'scale-up 1.5s ease-in-out forwards',
+        'pulse-scale': 'pulse-scale 3s ease-in-out infinite',
+        'initial-scale': 'initial-scale 0.5s ease-in-out forwards',
+        'slide-in': 'slide-in 0.5s ease-in-out forwards',
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
