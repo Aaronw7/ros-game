@@ -10,10 +10,12 @@ const pusher = new Pusher({
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { gameId, move, playerId } = req.body;
-  await pusher.trigger(`private-game-${gameId}`, 'selection-made', {
-    move,
-    playerId,
-  });
-  res.status(200).end();
+  const { socket_id, channel_name } = req.body;
+
+  try {
+    const auth = pusher.authorizeChannel(socket_id, channel_name);
+    res.send(auth);
+  } catch (error) {
+    res.status(500).send({ message: error});
+  }
 }

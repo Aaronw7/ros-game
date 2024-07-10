@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import pusher from '../utils/pusher';
 
 interface SelectProps {
   src: string;
@@ -9,6 +10,8 @@ interface SelectProps {
 
 interface ResultsProps {
   selection: 'Rock' | 'Paper' | 'Scissors';
+  gameId?: string;
+  updateScores: (result: string) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor }) => {
@@ -20,10 +23,49 @@ const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor }) => {
         <img src={src} alt={alt} className="w-12 md:w-20 h-auto bg-white" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-const Results: React.FC<ResultsProps> = ({ selection }) => {
+const Results: React.FC<ResultsProps> = ({ selection, gameId, updateScores }) => {
+  const [opponentMove, setOpponentMove] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
+  const [result, setResult] = useState<string | null>(null);
+  const playerId = localStorage.getItem('playerId');
+
+  useEffect(() => {
+    if (!gameId) return;
+
+    const channel = pusher.subscribe(`private-game-${gameId}`);
+
+    channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
+      if (data.playerId !== playerId) {
+        setOpponentMove(data.move);
+        determineResult(selection, data.move);
+      }
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [gameId, selection, playerId]);
+
+  const determineResult = (playerMove: 'Rock' | 'Paper' | 'Scissors', opponentMove: 'Rock' | 'Paper' | 'Scissors') => {
+    let gameResult;
+    if (playerMove === opponentMove) {
+      gameResult = 'Draw';
+    } else if (
+      (playerMove === 'Rock' && opponentMove === 'Scissors') ||
+      (playerMove === 'Scissors' && opponentMove === 'Paper') ||
+      (playerMove === 'Paper' && opponentMove === 'Rock')
+    ) {
+      gameResult = 'You win';
+    } else {
+      gameResult = 'You lose';
+    }
+    setResult(gameResult);
+    updateScores(gameResult);
+  };
+
   const getSelectionImage = (choice: 'Rock' | 'Paper' | 'Scissors') => {
     switch (choice) {
       case 'Rock':
@@ -41,10 +83,21 @@ const Results: React.FC<ResultsProps> = ({ selection }) => {
 
   return (
     <div className="flex flex-col w-full items-center gap-2">
-      <h2 className="text-2xl">You selected: {selection}</h2>
-      <Select src={src} alt={selection} outerBgColor={bgColor} />
+      <div className="flex flex-col md:flex-row w-full justify-center items-center md:gap-32">
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="text-2xl">You selected: {selection}</h2>
+          <Select src={src} alt={selection} outerBgColor={bgColor} />
+        </div>
+        {opponentMove && (
+          <div className="flex flex-col items-center gap-2">
+            <h2 className="text-2xl">Opponent selected: {opponentMove}</h2>
+            <Select src={getSelectionImage(opponentMove).src} alt={opponentMove as 'Rock' | 'Paper' | 'Scissors'} outerBgColor={getSelectionImage(opponentMove).bgColor} />
+          </div>
+        )}
+      </div>
+      {result && <h2 className="text-2xl">Result: {result}</h2>}
     </div>
-  )
-}
+  );
+};
 
 export default Results;

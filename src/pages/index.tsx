@@ -23,6 +23,14 @@ export default function Home() {
     router.push(`/two-player/${gameId}`);
   };
 
+  const updateScores = (result: string) => {
+    if (result === 'You win') {
+      setWin((prevWin) => prevWin + 1);
+    } else if (result === 'You lose') {
+      setLoss((prevLoss) => prevLoss + 1);
+    }
+  };
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}
@@ -30,7 +38,7 @@ export default function Home() {
       <div className="flex flex-col justify-start items-center w-full">
         <Header win={win} loss={loss} />
         {selection ? (
-          <Results selection={selection} />
+          <Results selection={selection} updateScores={updateScores} />
         ): (
           <Selections onSelect={handleSelection} />
         )}
