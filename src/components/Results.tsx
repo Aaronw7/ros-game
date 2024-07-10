@@ -26,27 +26,7 @@ const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor }) => {
 };
 
 const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, updateScores }) => {
-  // const [opponentMove, setOpponentMove] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
   const [result, setResult] = useState<string | null>(null);
-  // const playerId = localStorage.getItem('playerId');
-
-  // useEffect(() => {
-  //   if (!gameId) return;
-
-  //   const channel = pusher.subscribe(`private-game-${gameId}`);
-
-  //   channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
-  //     if (data.playerId !== playerId) {
-  //       setOpponentMove(data.move);
-  //       determineResult(selection, data.move);
-  //     }
-  //   });
-
-  //   return () => {
-  //     channel.unbind_all();
-  //     channel.unsubscribe();
-  //   };
-  // }, [gameId, selection, playerId]);
 
   useEffect(() => {
     determineResult(playerSelection, opponentSelection);
