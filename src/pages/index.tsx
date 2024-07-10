@@ -4,12 +4,13 @@ import Selections from '../components/Selections';
 
 export default function Home() {
   const [selection, setSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
-  const [score, setScore] = useState(0);
+  const [win, setWin] = useState(0);
+  const [loss, setLoss] = useState(2);
 
   const handleSelection = (choice: 'Rock' | 'Paper' | 'Scissors') => {
     setSelection(choice);
     // Update the score logic here
-    setScore((prevScore) => prevScore + 1);
+    setWin((prevScore) => prevScore + 1);
   };
 
   return (
@@ -22,9 +23,15 @@ export default function Home() {
           <p className="font-barlow font-bold text-2xl md:text-3xl -my-3">PAPER</p>
           <p className="font-barlow font-bold text-2xl md:text-3xl">SCISSORS</p>
         </div>
-        <div className="flex flex-col p-3 w-24 h-20 border rounded-lg justify-center items-center bg-white">
-          <p className="font-barlow font-semibold text-xs text-scoreText">SCORE</p>
-          <p className="font-barlow font-bold text-5xl text-darkText">{score}</p>
+        <div className="flex flex-row gap-2">
+          <div className="flex flex-col p-3 w-16 md:w-24 h-16 md:h-20 border rounded-lg justify-center items-center bg-white">
+            <p className="font-barlow font-semibold text-xs text-scoreText">WIN</p>
+            <p className="font-barlow font-bold text-2xl md:text-5xl text-darkText">{win}</p>
+          </div>
+          <div className="flex flex-col p-3 w-16 md:w-24 h-16 md:h-20 border rounded-lg justify-center items-center bg-white">
+            <p className="font-barlow font-semibold text-xs text-lossText">LOSE</p>
+            <p className="font-barlow font-bold text-2xl md:text-5xl text-darkText">{loss}</p>
+          </div>
         </div>
       </div>
       <Selections onSelect={handleSelection} />

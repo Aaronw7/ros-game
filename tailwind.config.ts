@@ -16,6 +16,7 @@ const config: Config = {
       },
       colors: {
         scoreText: '#394bdb',
+        lossText: '#db394b',
         darkText: '#3a475e',
         headerOutline: '#687387'
       },
