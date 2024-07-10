@@ -6,11 +6,14 @@ import Header from '../../components/Header';
 import Selections from '../../components/Selections';
 import Results from '../../components/Results';
 import { FaClipboardList } from "react-icons/fa";
+import pusher from '../../utils/pusher';
 
 export default function Home() {
   const router = useRouter();
   const { gameId } = router.query;
-  const [selection, setSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
+  const [playerSelection, setPlayerSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
+  const [opponentSelection, setOpponentSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
+  const [result, setResult] = useState<string | null>(null);
   const [win, setWin] = useState(0);
   const [loss, setLoss] = useState(0);
   const [url, setUrl] = useState('');
@@ -30,8 +33,25 @@ export default function Home() {
     setPlayerId(storedPlayerId);
   }, []);
 
+  useEffect(() => {
+    if (!gameId) return;
+
+    const channel = pusher.subscribe(`private-game-${gameId}`);
+
+    channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
+      if (data.playerId !== playerId) {
+        setOpponentSelection(data.move);
+      }
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [gameId, playerSelection, playerId]);
+
   const handleSelection = async (choice: 'Rock' | 'Paper' | 'Scissors') => {
-    setSelection(choice);
+    setPlayerSelection(choice);
 
     if (gameId && playerId) {
       await fetch('/api/select', {
@@ -82,8 +102,8 @@ export default function Home() {
           </div>
         </div>
         <Header win={win} loss={loss} />
-        {selection ? (
-          <Results selection={selection} gameId={Array.isArray(gameId) ? gameId[0] : gameId} updateScores={updateScores} />
+        {playerSelection && opponentSelection ? (
+          <Results playerSelection={playerSelection} opponentSelection={opponentSelection} updateScores={updateScores} />
         ) : (
           <Selections onSelect={handleSelection} />
         )}

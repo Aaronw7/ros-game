@@ -37,11 +37,11 @@ export default function Home() {
     >
       <div className="flex flex-col justify-start items-center w-full">
         <Header win={win} loss={loss} />
-        {selection ? (
+        {/* {selection ? (
           <Results selection={selection} updateScores={updateScores} />
         ): (
           <Selections onSelect={handleSelection} />
-        )}
+        )} */}
       </div>
       <div className="flex w-full justify-center md:justify-between gap-2">
         <button

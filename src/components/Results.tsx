@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
-import pusher from '../utils/pusher';
 
 interface SelectProps {
   src: string;
@@ -9,8 +8,8 @@ interface SelectProps {
 }
 
 interface ResultsProps {
-  selection: 'Rock' | 'Paper' | 'Scissors';
-  gameId?: string;
+  playerSelection: 'Rock' | 'Paper' | 'Scissors';
+  opponentSelection: 'Rock' | 'Paper' | 'Scissors';
   updateScores: (result: string) => void;
 }
 
@@ -26,28 +25,33 @@ const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor }) => {
   );
 };
 
-const Results: React.FC<ResultsProps> = ({ selection, gameId, updateScores }) => {
-  const [opponentMove, setOpponentMove] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
+const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, updateScores }) => {
+  // const [opponentMove, setOpponentMove] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
   const [result, setResult] = useState<string | null>(null);
-  const playerId = localStorage.getItem('playerId');
+  // const playerId = localStorage.getItem('playerId');
+
+  // useEffect(() => {
+  //   if (!gameId) return;
+
+  //   const channel = pusher.subscribe(`private-game-${gameId}`);
+
+  //   channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
+  //     if (data.playerId !== playerId) {
+  //       setOpponentMove(data.move);
+  //       determineResult(selection, data.move);
+  //     }
+  //   });
+
+  //   return () => {
+  //     channel.unbind_all();
+  //     channel.unsubscribe();
+  //   };
+  // }, [gameId, selection, playerId]);
 
   useEffect(() => {
-    if (!gameId) return;
-
-    const channel = pusher.subscribe(`private-game-${gameId}`);
-
-    channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
-      if (data.playerId !== playerId) {
-        setOpponentMove(data.move);
-        determineResult(selection, data.move);
-      }
-    });
-
-    return () => {
-      channel.unbind_all();
-      channel.unsubscribe();
-    };
-  }, [gameId, selection, playerId]);
+    determineResult(playerSelection, opponentSelection);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playerSelection, opponentSelection]);
 
   const determineResult = (playerMove: 'Rock' | 'Paper' | 'Scissors', opponentMove: 'Rock' | 'Paper' | 'Scissors') => {
     let gameResult;
@@ -79,21 +83,20 @@ const Results: React.FC<ResultsProps> = ({ selection, gameId, updateScores }) =>
     }
   };
 
-  const { src, bgColor } = getSelectionImage(selection);
+  const playerImage = getSelectionImage(playerSelection);
+  const opponentImage = getSelectionImage(opponentSelection);
 
   return (
     <div className="flex flex-col w-full items-center gap-2">
       <div className="flex flex-col md:flex-row w-full justify-center items-center md:gap-32">
         <div className="flex flex-col items-center gap-2">
-          <h2 className="text-2xl">You selected: {selection}</h2>
-          <Select src={src} alt={selection} outerBgColor={bgColor} />
+          <h2 className="text-2xl">You selected: {playerSelection}</h2>
+          <Select src={playerImage.src} alt={playerSelection} outerBgColor={playerImage.bgColor} />
         </div>
-        {opponentMove && (
-          <div className="flex flex-col items-center gap-2">
-            <h2 className="text-2xl">Opponent selected: {opponentMove}</h2>
-            <Select src={getSelectionImage(opponentMove).src} alt={opponentMove as 'Rock' | 'Paper' | 'Scissors'} outerBgColor={getSelectionImage(opponentMove).bgColor} />
-          </div>
-        )}
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="text-2xl">Opponent selected: {opponentSelection}</h2>
+          <Select src={opponentImage.src} alt={opponentSelection as 'Rock' | 'Paper' | 'Scissors'} outerBgColor={opponentImage.bgColor} />
+        </div>
       </div>
       {result && <h2 className="text-2xl">Result: {result}</h2>}
     </div>
