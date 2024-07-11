@@ -36,6 +36,11 @@ export default function Home() {
   useEffect(() => {
     if (!gameId || !playerId) return;
 
+    const resetGameState = () => {
+      setPlayerSelection(null);
+      setOpponentSelection(null);
+    }
+
     const joinGame = async () => {
       const response = await fetch('/api/join', {
         method: 'POST',
@@ -66,6 +71,10 @@ export default function Home() {
       if (data.playerId !== playerId) {
         setOpponentSelection(data.move);
       }
+    });
+
+    channel.bind('reset-game', () => {
+      resetGameState();
     });
 
     return () => {
@@ -117,6 +126,20 @@ export default function Home() {
     }
   };
 
+  const resetGame = async () => {
+    console.log('is this being called?');
+    if (gameId) {
+      await fetch('/api/reset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ gameId }),
+      });
+      console.log('could this be the problem?')
+    }
+  };
+
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}>
       <div className="flex flex-col justify-start items-center w-full">
@@ -150,7 +173,7 @@ export default function Home() {
         )}
         <Header win={win} loss={loss} />
         {playerSelection && opponentSelection ? (
-          <Results playerSelection={playerSelection} opponentSelection={opponentSelection} updateScores={updateScores} />
+          <Results playerSelection={playerSelection} opponentSelection={opponentSelection} updateScores={updateScores} resetGame={resetGame} />
         ) : (
           <Selections onSelect={handleSelection} />
         )}

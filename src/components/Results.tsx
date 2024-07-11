@@ -12,6 +12,7 @@ interface ResultsProps {
   playerSelection: 'Rock' | 'Paper' | 'Scissors';
   opponentSelection: 'Rock' | 'Paper' | 'Scissors';
   updateScores: (result: string) => void;
+  resetGame: () => void;
 }
 
 const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor, opponent }) => {
@@ -26,7 +27,7 @@ const Select: React.FC<SelectProps> = ({ src, alt, outerBgColor, opponent }) => 
   );
 };
 
-const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, updateScores }) => {
+const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, updateScores, resetGame }) => {
   const [result, setResult] = useState<string | null>(null);
   const [resultAnimated, setResultAnimated] = useState(false);
   const [opponentAnimated, setOpponentAnimated] = useState(false);
@@ -92,9 +93,17 @@ const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, u
         </div>
       </div>
       {resultAnimated && (
-        <h2 className={`font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : 'text-green-500'}`}>
-        {result}
-      </h2>
+        <div className="flex flex-col justify-center items-center">
+          <h2 className={`font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : 'text-green-500'}`}>
+            {result}
+          </h2>
+          <button
+            className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer"
+            onClick={resetGame}
+          >
+            REMATCH?
+          </button>
+        </div>
       )}
     </div>
   );
