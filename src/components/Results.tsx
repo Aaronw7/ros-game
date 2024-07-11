@@ -94,7 +94,7 @@ const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, u
       </div>
       {resultAnimated && (
         <div className="flex flex-col justify-center items-center">
-          <h2 className={`font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : 'text-green-500'}`}>
+          <h2 className={`font-bold text-5xl md:text-7xl ${resultAnimated ? 'animate-slide-in' : ''} ${result === "YOU LOSE" ? 'text-lossText' : result === "YOU WIN" ? 'text-green-500': ''}`}>
             {result}
           </h2>
           <button

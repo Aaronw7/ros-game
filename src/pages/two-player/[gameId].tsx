@@ -8,7 +8,7 @@ import Results from '../../components/Results';
 import { FaClipboardList } from "react-icons/fa";
 import pusher from '../../utils/pusher';
 
-export default function Home() {
+export default function TwoPlayer() {
   const router = useRouter();
   const { gameId } = router.query;
   const [playerSelection, setPlayerSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
@@ -77,22 +77,6 @@ export default function Home() {
       resetGameState();
     });
 
-    return () => {
-      channel.unbind_all();
-      channel.unsubscribe();
-    };
-  }, [gameId, playerId]);
-
-  useEffect(() => {
-    if (!gameId) return;
-
-    const channel = pusher.subscribe(`private-game-${gameId}`);
-
-    channel.bind('selection-made', (data: { move: 'Rock' | 'Paper' | 'Scissors', playerId: string }) => {
-      if (data.playerId !== playerId) {
-        setOpponentSelection(data.move);
-      }
-    });
 
     return () => {
       channel.unbind_all();
@@ -139,6 +123,12 @@ export default function Home() {
       console.log('could this be the problem?')
     }
   };
+
+  const resetGameState = () => {
+    console.log('Resetting game state');
+    setPlayerSelection(null);
+    setOpponentSelection(null);
+  }
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}>

@@ -1,4 +1,3 @@
-// server/api/join.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import Pusher from 'pusher';
 
