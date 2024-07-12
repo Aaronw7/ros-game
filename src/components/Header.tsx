@@ -10,7 +10,7 @@ const Header: React.FC<HeaderProps> = ({ win, loss }) => {
   return (
     <div className="flex justify-between w-full md:w-7/12 max-w-xl p-6 border border-headerOutline rounded-lg mb-6">
       <div className="flex flex-col justify-center">
-        <p className="font-bold text-2xl md:text-3xl">ROCK</p>
+        <p className="font-bold text-2xl md:text-3xl">REBEKAH</p>
         <p className="font-bold text-2xl md:text-3xl -my-3">PAPER</p>
         <p className="font-bold text-2xl md:text-3xl">SCISSORS</p>
       </div>
