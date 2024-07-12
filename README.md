@@ -1,4 +1,4 @@
-# Rock, Paper, Scissors
+# Rock Paper Scissors
 
 This is a personal project to showcase proficiencies in the following technologies:
 Next.js, Typescript, Tailwind CSS, Serverless Principles, Websockets
