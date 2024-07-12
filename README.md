@@ -5,7 +5,6 @@ Next.js, Typescript, Tailwind CSS, Serverless Principles, Websockets
 
 ## Table of contents
 
-- [Getting Started](#getting-started)
 - [Overview](#overview)
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
@@ -14,22 +13,7 @@ Next.js, Typescript, Tailwind CSS, Serverless Principles, Websockets
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Getting Started](#getting-started)
 
 ## Overview
 
@@ -53,18 +37,33 @@ Users should be able to:
 
 ### Built with
 
-- Tailwind CSS
 - Flexbox
-- CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [Tailwind CSS](https://tailwindcss.com/) - utility-first CSS framework
+- [Pusher](https://pusher.com/) - Third-Party Hosted Service for real-time bi-directional communication
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This project was an amazing opportunity to utilize NextJS and TailwindCSS to build upon UI/UX concepts. Initially, I only intended to play against a bot, however, I wanted to share this project with friends and family. In the process, I expanded the scope to include a "Play with Friend" mode which required real-time bi-directional communication through websockets.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+I plan to continue adding features to this project to enhance the user experience. I think starting with some onClick sound effects will be a great place to start.
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
