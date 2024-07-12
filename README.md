@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Landing Page](https://i.imgur.com/uoc0ryX.png)
 
 ### Links
 
