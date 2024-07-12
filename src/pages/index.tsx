@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Selections from '../components/Selections';
 import Results from '../components/Results';
+import Rules from '../components/Rules';
 import { generateGameId } from '../utils/generateGameId';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
   const [opponentSelection, setOpponentSelection] = useState<'Rock' | 'Paper' | 'Scissors' | null>(null);
   const [win, setWin] = useState(0);
   const [loss, setLoss] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleSelection = (choice: 'Rock' | 'Paper' | 'Scissors') => {
     setPlayerSelection(choice);
@@ -42,6 +44,14 @@ export default function Home() {
     router.push(`/two-player/${gameId}`);
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial overflow-hidden`}
@@ -61,7 +71,11 @@ export default function Home() {
         >
           PLAY WITH A FRIEND
         </button>
-        <button className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer">
+        <Rules isOpen={modalOpen} onClose={closeModal} />
+        <button
+          className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer"
+          onClick={openModal}
+        >
           RULES
         </button>
       </div>

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Header from '../../components/Header';
 import Selections from '../../components/Selections';
 import Results from '../../components/Results';
+import Rules from '../../components/Rules';
 import { FaClipboardList } from "react-icons/fa";
 import pusher from '../../utils/pusher';
 
@@ -18,6 +19,7 @@ export default function TwoPlayer() {
   const [url, setUrl] = useState('');
   const [playerId, setPlayerId] = useState<string | null>(null);
   const [isGameFull, setIsGameFull] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const currentUrl = window.location.href;
@@ -122,6 +124,14 @@ export default function TwoPlayer() {
     router.push(`/`);
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}>
       <div className="flex flex-col justify-start items-center w-full">
@@ -173,7 +183,11 @@ export default function TwoPlayer() {
         >
           PLAY WITH BOT
         </button>
-        <button className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer">
+        <Rules isOpen={modalOpen} onClose={closeModal} />
+        <button
+          className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer"
+          onClick={openModal}
+        >
           RULES
         </button>
       </div>
