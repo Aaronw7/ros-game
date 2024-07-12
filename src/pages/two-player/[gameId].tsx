@@ -98,10 +98,6 @@ export default function TwoPlayer() {
     }
   };
 
-  const handlePlayWithBot = () => {
-    router.push(`/`);
-  };
-
   const updateScores = (result: string) => {
     if (result === 'YOU WIN') {
       setWin((prevWin) => prevWin + 1);
@@ -124,11 +120,9 @@ export default function TwoPlayer() {
     }
   };
 
-  const resetGameState = () => {
-    console.log('Resetting game state');
-    setPlayerSelection(null);
-    setOpponentSelection(null);
-  }
+  const handlePlayWithBot = () => {
+    router.push(`/`);
+  };
 
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial`}>
