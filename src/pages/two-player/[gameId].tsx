@@ -154,10 +154,16 @@ export default function TwoPlayer() {
           </div>
         )}
         <Header win={win} loss={loss} />
-        {playerSelection && opponentSelection ? (
-          <Results playerSelection={playerSelection} opponentSelection={opponentSelection} updateScores={updateScores} resetGame={resetGame} />
+        {isGameFull ? (
+          playerSelection && opponentSelection ? (
+            <Results playerSelection={playerSelection} opponentSelection={opponentSelection} updateScores={updateScores} resetGame={resetGame} />
+          ) : (
+            <Selections onSelect={handleSelection} />
+          )
         ) : (
-          <Selections onSelect={handleSelection} />
+          <div>
+            <h2 className="text-2xl text-yellow-500">PLEASE WAIT FOR SOMEONE TO JOIN</h2>
+          </div>
         )}
       </div>
       <div className="flex w-full justify-center md:justify-between gap-2 mt-4">

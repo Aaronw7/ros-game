@@ -39,12 +39,17 @@ const config: Config = {
           '0%': { transform: 'translateX(50%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        'slide-up': {
+          '0%': { transform: 'translateY(40%)', opacity: '0' },
+          '100%': { transform: 'translateY(0%)', opacity: '1' },
+        }
       },
       animation: {
         'scale-up': 'scale-up 1.5s ease-in-out forwards',
         'pulse-scale': 'pulse-scale 3s ease-in-out infinite',
         'initial-scale': 'initial-scale 0.5s ease-in-out forwards',
         'slide-in': 'slide-in 0.5s ease-in-out forwards',
+        'slide-up': 'slide-up 0.5s ease-in-out forwards',
       },
     },
   },

@@ -81,8 +81,8 @@ const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, u
   const opponentImage = getSelectionImage(opponentSelection);
 
   return (
-    <div className="flex flex-col w-full items-center gap-2">
-      <div className="flex flex-col md:flex-row w-full justify-center items-center gap-8 md:gap-32 md:my-12">
+    <div className="flex flex-col w-full items-center gap-4">
+      <div className="flex flex-col md:flex-row w-full justify-center items-center gap-4 md:gap-32 md:my-12">
         <div className="flex flex-col items-center gap-2">
           <h2 className="font-semibold text-2xl">YOU PICKED</h2>
           <Select src={playerImage.src} alt={playerSelection} outerBgColor={playerImage.bgColor} />
@@ -98,7 +98,7 @@ const Results: React.FC<ResultsProps> = ({ playerSelection, opponentSelection, u
             {result}
           </h2>
           <button
-            className="bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer"
+            className={`bg-transparent text-white font-semibold py-2 px-4 border border-headerOutline hover:border-white rounded hover:cursor-pointer ${resultAnimated ? 'animate-slide-up' : ''}`}
             onClick={resetGame}
           >
             REMATCH?
