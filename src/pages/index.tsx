@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Header from '../components/Header';
 import Selections from '../components/Selections';
 import Results from '../components/Results';
@@ -56,6 +57,10 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center justify-between py-12 px-8 bg-custom-radial overflow-hidden`}
     >
+      <Head>
+        <title>Rock Paper Scissors Project</title>
+        <meta name="description" content="The same childhood game capable of playing with a bot or with a friend" />
+      </Head>
       <div className="flex flex-col justify-start items-center w-full">
         <Header win={win} loss={loss} />
         {playerSelection && opponentSelection ? (
