@@ -77,7 +77,6 @@ export default function TwoPlayer() {
       resetGameState();
     });
 
-
     return () => {
       channel.unbind_all();
       channel.unsubscribe();
@@ -107,7 +106,6 @@ export default function TwoPlayer() {
   };
 
   const resetGame = async () => {
-    console.log('is this being called?');
     if (gameId) {
       await fetch('/api/reset', {
         method: 'POST',
