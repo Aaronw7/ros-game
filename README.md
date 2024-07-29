@@ -7,8 +7,8 @@ Next.js, Typescript, Tailwind CSS, Serverless Principles, Websockets
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
+  - [Screenshot](#screenshot)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
@@ -25,13 +25,13 @@ Users should be able to:
 - Play Rock, Paper, Scissors against the computer
 - Send an invite and play against a friend
 
+### Links
+
+[Rock Paper Scissors](https://rps-game-nine-blond.vercel.app/)
+
 ### Screenshot
 
 ![Landing Page](https://i.imgur.com/uoc0ryX.png)
-
-### Links
-
-- Live Site URL: [Rock Paper Scissors](https://rps-game-nine-blond.vercel.app/)
 
 ## My process
 
